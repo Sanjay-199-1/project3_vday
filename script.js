@@ -78,20 +78,11 @@ function closePasswordModal() {
 }
 
 /**
- * Load assets (audio and images) from data-src attributes
+ * Load images from data-src attributes
  * Only called after password verification
  */
-function loadAssets() {
+function loadImages() {
     if (assetsLoaded) return; // Only load once
-    
-    // Load audio elements
-    const audioElements = document.querySelectorAll('audio');
-    audioElements.forEach(audio => {
-        if (!audio.src && audio.dataset.src) {
-            audio.src = audio.dataset.src;
-            audio.preload = 'auto';
-        }
-    });
     
     // Load image elements
     const imageElements = document.querySelectorAll('img[data-src]');
@@ -120,8 +111,8 @@ function checkPassword() {
     const correctPassword = passwords[currentCardSection.section];
     
     if (password === correctPassword) {
-        // Password correct - load assets (audio and images)
-        loadAssets();
+        // Password correct - load images
+        loadImages();
         // Navigate to the section
         closePasswordModal();
         navigateToPage(currentCardSection.cardType);
@@ -203,11 +194,6 @@ function playAudio(section) {
     const audio = document.getElementById(audioId);
     
     if (audio) {
-        // Load src from data-src if not already loaded
-        if (!audio.src && audio.dataset.src) {
-            audio.src = audio.dataset.src;
-        }
-        
         // Stop all OTHER audio except this one
         stopAllAudio(audioId);
         
@@ -215,7 +201,7 @@ function playAudio(section) {
         audio.currentTime = 0;
         audio.volume = 0.5; // Set volume to 50%
         
-        // Always try to play (userHasInteracted check not needed for YES button)
+        // Play audio
         const playPromise = audio.play();
         if (playPromise !== undefined) {
             playPromise.catch(error => {
