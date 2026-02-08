@@ -13,15 +13,6 @@ document.addEventListener('touchstart', function enableAutoplayAfterTouch() {
     document.removeEventListener('touchstart', enableAutoplayAfterTouch);
 }, { once: true });
 
-// Load YES audio immediately (doesn't require password)
-window.addEventListener('load', function loadYesAudio() {
-    const yesAudio = document.getElementById('audio-yes');
-    if (yesAudio && yesAudio.dataset.src && !yesAudio.src) {
-        yesAudio.src = yesAudio.dataset.src;
-        yesAudio.preload = 'auto';
-    }
-});
-
 // ===== PASSWORD MANAGEMENT =====
 // Different passwords for each section
 const passwords = {
@@ -212,6 +203,11 @@ function playAudio(section) {
     const audio = document.getElementById(audioId);
     
     if (audio) {
+        // Load src from data-src if not already loaded
+        if (!audio.src && audio.dataset.src) {
+            audio.src = audio.dataset.src;
+        }
+        
         // Stop all OTHER audio except this one
         stopAllAudio(audioId);
         
@@ -219,14 +215,12 @@ function playAudio(section) {
         audio.currentTime = 0;
         audio.volume = 0.5; // Set volume to 50%
         
-        // Only attempt autoplay if user has interacted with the page
-        if (userHasInteracted) {
-            const playPromise = audio.play();
-            if (playPromise !== undefined) {
-                playPromise.catch(error => {
-                    console.log('Audio playback error:', error.message);
-                });
-            }
+        // Always try to play (userHasInteracted check not needed for YES button)
+        const playPromise = audio.play();
+        if (playPromise !== undefined) {
+            playPromise.catch(error => {
+                console.log('Audio playback error:', error.message);
+            });
         }
     }
 }
