@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine's Day Darling ❤️</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Audio Elements -->
+    <audio id="audio-april" src="assets/audio/AudioCutter_Eppadi Vandhaayo.mp3" preload="auto"></audio>
+    <audio id="audio-meet" src="assets/audio/En Moochava Pechava Male Ringtone.mp3" preload="auto"></audio>
+    <audio id="audio-date" src="assets/audio/AudioCutter_Edd_Sheeran_-_Perfect_(mp3.pm).mp3" preload="auto"></audio>
+    <audio id="audio-yes" src="assets/audio/Sollitaley Ava Kaadhala.mp3" preload="auto"></audio>
+
+    <!-- Love Note Modal -->
+    <div id="loveNoteModal" class="modal hidden">
+        <div class="modal-content love-note-content">
+            <div class="modal-header">
+                <h2>💌 A Love Note</h2>
+                <button class="close-btn" onclick="closeLoveNote()">&times;</button>
+            </div>
+            <div class="love-note-text">
+                <p>
+                    If I was able to write my own destiny, I would simply write your name and break the pen ❤️
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Password Modal -->
+    <div id="passwordModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Enter Password 🔐</h2>
+                <button class="close-btn" onclick="closePasswordModal()">&times;</button>
+            </div>
+            <input type="password" id="passwordInput" class="password-input" placeholder="Enter the password...">
+            <p class="hint" id="passwordHint"></p>
+            <div class="modal-buttons">
+                <button class="btn btn-primary" onclick="checkPassword()">Enter</button>
+                <button class="btn btn-secondary" onclick="closePasswordModal()">Cancel</button>
+            </div>
+            <p class="error-message" id="errorMessage"></p>
+        </div>
+    </div>
+
+    <!-- HOME PAGE -->
+    <div id="homePage" class="page active">
+        <div class="container">
+            <!-- Header -->
+            <header class="header">
+                <h1 class="title fade-in">Happy Valentine's Day Darling❤️</h1>
+                <p class="subtitle fade-in">A special collection my special one</p>
+            </header>
+
+            <!-- Cards Section -->
+            <div class="cards-container">
+                <div class="card fade-in" onclick="openCard('april', 'april')">
+                    <div class="card-content">
+                        <div class="card-icon">📅</div>
+                        <h3>Special day💝</h3>
+                        <p>The Beginning</p>
+                    </div>
+                </div>
+
+                <div class="card fade-in" onclick="openCard('meet', 'meet')">
+                    <div class="card-content">
+                        <div class="card-icon">👫</div>
+                        <h3>Hearts Learning Eachother💓</h3>
+                        <p>The Connection</p>
+                    </div>
+                </div>
+
+                <div class="card fade-in" onclick="openCard('date', 'date')">
+                    <div class="card-content">
+                        <div class="card-icon">💕</div>
+                        <h3>Us,Always ❣</h3>
+                        <p> My Forever</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Valentine Question -->
+            <div class="valentine-section fade-in">
+                <h2 class="valentine-question">Will you be my Valentine? 💖</h2>
+                <div class="valentine-buttons">
+                    <button class="btn btn-yes" id="yesBtn" onclick="onYesClick()">YES</button>
+                    <button class="btn btn-no" id="noBtn" onclick="onNoClick()">NO</button>
+                </div>
+            </div>
+
+            <!-- Response Section -->
+            <div id="responseSection" class="response-section hidden">
+                <div class="floating-hearts">
+                    <span class="heart">❤️</span>
+                    <span class="heart">💕</span>
+                    <span class="heart">💖</span>
+                    <span class="heart">❤️</span>
+                    <span class="heart">💕</span>
+                </div>
+                <h2 id="responseText" class="response-text"></h2>
+                <button class="for-you-btn" onclick="showLoveNote()">💝 For you</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- APRIL 3 PAGE -->
+    <div id="aprilPage" class="page">
+        <div class="container content-page">
+            <header class="content-header">
+                <button class="back-btn" onclick="goHome()">← Back Home</button>
+                <h1>April 3rd 📅</h1>
+                <p class="content-date">03/04/2023</p>
+            </header>
+
+            <div class="gallery-section">
+                <h2>Photo Gallery</h2>
+                <div class="gallery">
+                    <div class="gallery-item fade-in">
+                        <img src="assets/images/semis2.jpg" alt="Memory 1">
+                        <p class="caption">A moment to remember</p>
+                    </div>
+                    <div class="gallery-item fade-in">
+                        <img src="assets/images/semis1.jpg" alt="Memory 2">
+                        <p class="caption">You made me smile</p>
+                    </div>
+                    <div class="gallery-item fade-in">
+                        <img src="assets/images/semis3.jpg" alt="Memory 3">
+                        <p class="caption">Forever in my heart</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FIRST MEET PAGE -->
+    <div id="meetPage" class="page">
+        <div class="container content-page">
+            <header class="content-header">
+                <button class="back-btn" onclick="goHome()">← Back Home</button>
+                <h1>First Meet 👫</h1>
+                <p class="content-date">08/10/2023</p>
+            </header>
+
+            <div class="gallery-section">
+                <h2>Our First Meeting</h2>
+                <div class="gallery with-captions">
+                    <div class="gallery-item fade-in">
+                        <img src="assets/images/prefinal.jpg" alt="First Meet 1">
+                        <p class="caption">The moment I saw you</p>
+                    </div>
+                    <div class="gallery-item fade-in">
+                        <img src="assets/images/prefinal2.jpg" alt="First Meet 2">
+                        <p class="caption">Instant connection</p>
+                    </div>
+                    <div class="gallery-item fade-in">
+                        <img src="assets/images/prefinal3.jpg" alt="First Meet 3">
+                        <p class="caption">You stole my heart</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FIRST DATE PAGE -->
+    <div id="datePage" class="page">
+        <div class="container content-page">
+            <header class="content-header">
+                <button class="back-btn" onclick="goHome()">← Back Home</button>
+                <h1>First Date 💕</h1>
+                <p class="content-date">13/09/2024</p>
+            </header>
+
+            <div class="gallery-section">
+                <h2>Our First Date</h2>
+                <div class="gallery">
+                    <div class="gallery-item fade-in">
+                        <img src="assets/images/final3.jpg" alt="Date 1">
+                        <p class="caption">This is where it started</p>
+                    </div>
+                    <div class="gallery-item fade-in">
+                        <img src="assets/images/final1.jpg" alt="Date 2">
+                        <p class="caption">Best day of my life</p>
+                    </div>
+                    <div class="gallery-item fade-in">
+                        <img src="assets/images/final.jpg" alt="Date 3">
+                        <p class="caption">With you, forever</p>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
