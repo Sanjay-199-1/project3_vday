@@ -13,6 +13,15 @@ document.addEventListener('touchstart', function enableAutoplayAfterTouch() {
     document.removeEventListener('touchstart', enableAutoplayAfterTouch);
 }, { once: true });
 
+// Load YES audio immediately (doesn't require password)
+window.addEventListener('load', function loadYesAudio() {
+    const yesAudio = document.getElementById('audio-yes');
+    if (yesAudio && yesAudio.dataset.src && !yesAudio.src) {
+        yesAudio.src = yesAudio.dataset.src;
+        yesAudio.preload = 'auto';
+    }
+});
+
 // ===== PASSWORD MANAGEMENT =====
 // Different passwords for each section
 const passwords = {
