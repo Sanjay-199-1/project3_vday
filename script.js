@@ -78,17 +78,26 @@ function closePasswordModal() {
 }
 
 /**
- * Load audio assets from data-src attributes
+ * Load assets (audio and images) from data-src attributes
  * Only called after password verification
  */
-function loadAudioAssets() {
+function loadAssets() {
     if (assetsLoaded) return; // Only load once
     
+    // Load audio elements
     const audioElements = document.querySelectorAll('audio');
     audioElements.forEach(audio => {
         if (!audio.src && audio.dataset.src) {
             audio.src = audio.dataset.src;
             audio.preload = 'auto';
+        }
+    });
+    
+    // Load image elements
+    const imageElements = document.querySelectorAll('img[data-src]');
+    imageElements.forEach(img => {
+        if (!img.src && img.dataset.src) {
+            img.src = img.dataset.src;
         }
     });
     
@@ -111,8 +120,8 @@ function checkPassword() {
     const correctPassword = passwords[currentCardSection.section];
     
     if (password === correctPassword) {
-        // Password correct - load audio assets
-        loadAudioAssets();
+        // Password correct - load assets (audio and images)
+        loadAssets();
         // Navigate to the section
         closePasswordModal();
         navigateToPage(currentCardSection.cardType);
