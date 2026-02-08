@@ -13,16 +13,12 @@ A beautiful, fully responsive Valentine's Day website with password-protected me
 
 ### Password Protection
 Each section has a unique password:
-- **April 3**: `april2023`
-- **First Meet**: `firstmeet`
-- **First Date**: `firstdate`
 
 ### Content Pages
 Each section includes:
 - Date display
 - Photo gallery with captions
-- Romantic background music (autoplay)
-- Love note (on First Date page)
+
 - Music player controls
 
 ### Interactive Features
@@ -68,13 +64,6 @@ The website is fully responsive and works perfectly on:
 3. After successful authentication, view the memories
 4. Music will autoplay - use the music player to control it
 5. Answer the Valentine's question at the bottom
-
-## 🔐 Password Hints
-
-To help remember passwords:
-- April 3: Think of the month and year
-- First Meet: Two words describing the event
-- First Date: Two words describing what happened first
 
 ## 🎵 Audio
 
