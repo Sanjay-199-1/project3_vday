@@ -161,9 +161,16 @@ function playAudio(section) {
     
     if (audio) {
         audio.volume = 0.5; // Set volume to 50%
-        audio.play().catch(error => {
-            console.log('Audio playback failed:', error);
-        });
+        const playPromise = audio.play();
+        if (playPromise !== undefined) {
+            playPromise.catch(error => {
+                console.error(`Audio playback failed for ${audioId}:`, error);
+                alert(`Audio playback failed for ${audioId}: ${error.message}`);
+            });
+        }
+    } else {
+        console.error(`Audio element not found: ${audioId}`);
+        alert(`Audio element not found: ${audioId}`);
     }
 }
 
