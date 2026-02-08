@@ -155,13 +155,15 @@ function goHome() {
 
 // ===== AUDIO MANAGEMENT =====
 /**
- * Stop all audio elements
+ * Stop all audio elements except the one about to play
  */
-function stopAllAudio() {
+function stopAllAudio(excludeId = null) {
     const audioElements = document.querySelectorAll('audio');
     audioElements.forEach(audio => {
-        audio.pause();
-        audio.currentTime = 0;
+        if (!excludeId || audio.id !== excludeId) {
+            audio.pause();
+            audio.currentTime = 0;
+        }
     });
 }
 
@@ -174,6 +176,11 @@ function playAudio(section) {
     const audio = document.getElementById(audioId);
     
     if (audio) {
+        // Stop all OTHER audio except this one
+        stopAllAudio(audioId);
+        
+        // Reset this audio to the beginning
+        audio.currentTime = 0;
         audio.volume = 0.5; // Set volume to 50%
         
         // Only attempt autoplay if user has interacted with the page
@@ -181,7 +188,7 @@ function playAudio(section) {
             const playPromise = audio.play();
             if (playPromise !== undefined) {
                 playPromise.catch(error => {
-                    console.log('Audio playback blocked:', error.message);
+                    console.log('Audio playback error:', error.message);
                 });
             }
         }
