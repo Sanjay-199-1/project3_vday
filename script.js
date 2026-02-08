@@ -212,15 +212,12 @@ function playAudio(section) {
         
         // Only attempt autoplay if user has interacted with the page
         if (userHasInteracted) {
-            // Add small delay to avoid race condition with pause
-            setTimeout(() => {
-                const playPromise = audio.play();
-                if (playPromise !== undefined) {
-                    playPromise.catch(error => {
-                        console.log('Audio playback error:', error.message);
-                    });
-                }
-            }, 100);
+            const playPromise = audio.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                    console.log('Audio playback error:', error.message);
+                });
+            }
         }
     }
 }
