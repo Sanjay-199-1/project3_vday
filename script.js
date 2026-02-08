@@ -1,3 +1,17 @@
+// Track user interaction for autoplay permission
+let userHasInteracted = false;
+
+// Enable autoplay after first user interaction
+document.addEventListener('click', function enableAutoplayAfterInteraction() {
+    userHasInteracted = true;
+    document.removeEventListener('click', enableAutoplayAfterInteraction);
+}, { once: true });
+
+document.addEventListener('touchstart', function enableAutoplayAfterTouch() {
+    userHasInteracted = true;
+    document.removeEventListener('touchstart', enableAutoplayAfterTouch);
+}, { once: true });
+
 // ===== PASSWORD MANAGEMENT =====
 // Different passwords for each section
 const passwords = {
@@ -161,16 +175,16 @@ function playAudio(section) {
     
     if (audio) {
         audio.volume = 0.5; // Set volume to 50%
-        const playPromise = audio.play();
-        if (playPromise !== undefined) {
-            playPromise.catch(error => {
-                console.error(`Audio playback failed for ${audioId}:`, error);
-                alert(`Audio playback failed for ${audioId}: ${error.message}`);
-            });
+        
+        // Only attempt autoplay if user has interacted with the page
+        if (userHasInteracted) {
+            const playPromise = audio.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                    console.log('Audio playback blocked:', error.message);
+                });
+            }
         }
-    } else {
-        console.error(`Audio element not found: ${audioId}`);
-        alert(`Audio element not found: ${audioId}`);
     }
 }
 
