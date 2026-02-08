@@ -1,5 +1,6 @@
 // Track user interaction for autoplay permission
 let userHasInteracted = false;
+let assetsLoaded = false;
 
 // Enable autoplay after first user interaction
 document.addEventListener('click', function enableAutoplayAfterInteraction() {
@@ -77,6 +78,24 @@ function closePasswordModal() {
 }
 
 /**
+ * Load audio assets from data-src attributes
+ * Only called after password verification
+ */
+function loadAudioAssets() {
+    if (assetsLoaded) return; // Only load once
+    
+    const audioElements = document.querySelectorAll('audio');
+    audioElements.forEach(audio => {
+        if (!audio.src && audio.dataset.src) {
+            audio.src = audio.dataset.src;
+            audio.preload = 'auto';
+        }
+    });
+    
+    assetsLoaded = true;
+}
+
+/**
  * Verify the entered password
  */
 function checkPassword() {
@@ -92,7 +111,9 @@ function checkPassword() {
     const correctPassword = passwords[currentCardSection.section];
     
     if (password === correctPassword) {
-        // Password correct - navigate to the section
+        // Password correct - load audio assets
+        loadAudioAssets();
+        // Navigate to the section
         closePasswordModal();
         navigateToPage(currentCardSection.cardType);
     } else {
