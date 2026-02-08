@@ -95,9 +95,6 @@ function checkPassword() {
         // Password correct - navigate to the section
         closePasswordModal();
         navigateToPage(currentCardSection.cardType);
-        // Stop previous audio and play new one
-        stopAllAudio();
-        playAudio(currentCardSection.section);
     } else {
         // Wrong password
         errorMessage.textContent = '❌ Wrong password! Try again.';
@@ -185,12 +182,15 @@ function playAudio(section) {
         
         // Only attempt autoplay if user has interacted with the page
         if (userHasInteracted) {
-            const playPromise = audio.play();
-            if (playPromise !== undefined) {
-                playPromise.catch(error => {
-                    console.log('Audio playback error:', error.message);
-                });
-            }
+            // Add small delay to avoid race condition with pause
+            setTimeout(() => {
+                const playPromise = audio.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        console.log('Audio playback error:', error.message);
+                    });
+                }
+            }, 100);
         }
     }
 }
