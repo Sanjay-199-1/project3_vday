@@ -23,9 +23,9 @@ const passwords = {
 
 // Hints shown in the password modal for each section
 const passwordHints = {
-    april: 'first special day',
-    meet: 'first meet',
-    date: 'Most recent special day'
+    april: 'first special day (dd/mm/yy)',
+    meet: 'first meet (dd/mm/yy)',
+    date: 'Most recent special day (dd/mm/yy)'
 };
 
 // Track which section needs password
@@ -281,7 +281,9 @@ function onNoClick() {
         'please dont click me 😥',
         'he loves you so much 😭',
         'You are his everything 😫',
-        'Please click yesss 😭'
+        'Please click yesss 😭',
+        'I am begging youuu 😩',
+        'He will do anything for you😭',
     ];
     const idx = (noButtonClickCount - 1) % messages.length;
     noBtn.textContent = messages[idx];
