@@ -544,15 +544,16 @@ body {
 }
 
 .hint {
-    color: var(--primary-color);
+    color: #D1416B;
     text-align: center;
     margin: 1rem 0;
     padding: 0.8rem;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+    font-weight: 600;
     font-style: italic;
-    background: rgba(255, 182, 193, 0.15);
+    background: rgba(255, 182, 193, 0.35);
     border-radius: 8px;
-    border-left: 3px solid var(--primary-color);
+    border-left: 4px solid #FF69B4;
     display: block;
 }
 
